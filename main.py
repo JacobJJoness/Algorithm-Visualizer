@@ -78,8 +78,22 @@ def insertion_sort(arr):
 
 def draw_bars(arr, active_indices=[]):
     display.fill(background_color)
+    
+    # Define the gradient colors
+    start_color = (0, 0, 255)  # Blue
+    end_color = (255, 0, 0)    # Red
+    
     for i, height in enumerate(arr):
-        color = bar_color
+        # Calculate the interpolation factor based on the height
+        interp_factor = (height - min(arr)) / (max(arr) - min(arr))
+        
+        # Interpolate between start_color and end_color
+        color = (
+            int(start_color[0] + interp_factor * (end_color[0] - start_color[0])),
+            int(start_color[1] + interp_factor * (end_color[1] - start_color[1])),
+            int(start_color[2] + interp_factor * (end_color[2] - start_color[2]))
+        )
+        
         if i in active_indices:
             color = active_color
         x_pos = i * (bar_width + gap)
