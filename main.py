@@ -2,11 +2,10 @@ import pygame
 import random
 import time
 
-
 pygame.init()
 
 # Set up display
-width, height = 800, 600
+width, height = 900, 700
 display = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Insertion Sort Visualizer")
 
@@ -15,10 +14,8 @@ background_color = (25, 25, 25)
 bar_color = (255, 0, 0)
 active_color = (0, 255, 0)
 
-
-
-# Number of bars and their width
-num_bars = 200
+# Calculate number of bars and their width dynamically
+num_bars = 200  # Change this to your desired number of bars
 bar_width = width // num_bars
 gap = 2
 
@@ -48,8 +45,8 @@ class Button:
         if self.rect.collidepoint(pos):
             self.action()
 
-play_pause_button = Button("Play/Pause", (50, 50), lambda: global_play_pause())
-restart_button = Button("Restart", (50, 120), lambda: restart())
+play_pause_button = Button("Play/Pause", (50, height - 150), lambda: global_play_pause())
+restart_button = Button("Restart", (50, height - 80), lambda: restart())
 
 def global_play_pause():
     global paused
@@ -65,7 +62,7 @@ def insertion_sort(arr):
             j -= 1
             draw_bars(arr, [i, j + 1])
             pygame.display.update()
-            time.sleep(0.1)
+            time.sleep(0.01)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -96,12 +93,13 @@ def draw_bars(arr, active_indices=[]):
         
         if i in active_indices:
             color = active_color
-        x_pos = i * (bar_width + gap)
+        x_pos = i * bar_width
         y_pos = height
         pygame.draw.rect(display, color, (x_pos, 0, bar_width, height))
     play_pause_button.draw()
     restart_button.draw()
     pygame.display.update()
+
 
 def restart():
     global bar_heights, paused
@@ -131,3 +129,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
+
+
