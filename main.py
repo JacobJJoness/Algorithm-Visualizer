@@ -17,7 +17,7 @@ active_color = (0, 255, 0)
 # Calculate number of bars and their width dynamically
 num_bars = 200  # Change this to your desired number of bars
 bar_width = width // num_bars
-gap = 2
+
 
 # Generate random heights for bars
 bar_heights = [random.randint(50, 500) for _ in range(num_bars)]
